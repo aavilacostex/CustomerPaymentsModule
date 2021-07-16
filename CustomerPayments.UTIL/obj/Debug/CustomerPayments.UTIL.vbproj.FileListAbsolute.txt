@@ -11,3 +11,16 @@ C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.UTIL\obj\Debug
 C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.xml
 C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.pdb
 C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.vbprojAssemblyReference.cache
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Debug\CustomerPayments.UTIL.dll
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Debug\CustomerPayments.UTIL.pdb
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Debug\CustomerPayments.UTIL.xml
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Debug\IBM.Data.DB2.iSeries.dll
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Debug\IBM.Data.DB2.iSeries.xml
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.vbprojAssemblyReference.cache
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.Resources.resources
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.vbproj.GenerateResource.cache
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.vbproj.CoreCompileInputs.cache
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.vbproj.CopyComplete
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.dll
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.xml
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.pdb
