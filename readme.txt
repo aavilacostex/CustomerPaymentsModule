@@ -1,0 +1,1 @@
+Project for accounting customer payments

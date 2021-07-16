@@ -1,0 +1,16 @@
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\bin\Debug\CustomerPayments.DTO.dll
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\bin\Debug\CustomerPayments.DTO.pdb
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\bin\Debug\CustomerPayments.DTO.xml
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\bin\Debug\CustomerPayments.UTIL.dll
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\bin\Debug\IBM.Data.DB2.iSeries.dll
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\bin\Debug\CustomerPayments.UTIL.pdb
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\bin\Debug\CustomerPayments.UTIL.xml
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\bin\Debug\IBM.Data.DB2.iSeries.xml
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\obj\Debug\CustomerPayments.DTO.vbprojAssemblyReference.cache
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\obj\Debug\CustomerPayments.DTO.Resources.resources
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\obj\Debug\CustomerPayments.DTO.vbproj.GenerateResource.cache
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\obj\Debug\CustomerPayments.DTO.vbproj.CoreCompileInputs.cache
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\obj\Debug\CustomerPayments.DTO.vbproj.CopyComplete
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\obj\Debug\CustomerPayments.DTO.dll
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\obj\Debug\CustomerPayments.DTO.xml
+C:\Users\aavila\source\repos\CustPaymentsProject\CustomerPayments.DTO\obj\Debug\CustomerPayments.DTO.pdb
