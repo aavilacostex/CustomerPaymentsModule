@@ -46,13 +46,13 @@ Public Class SiteMaster
 
                     Session("username") = strUser.Name
                     Session("userid") = strUser.SamAccountName
-                    lblUsername.Text = "User: " + onlyUser + " - " + strUser.Name
+                    'lblUsername.Text = "User: " + onlyUser + " - " + strUser.Name
 
                 Else
                     Log.Info("User Is Nothing")
                     onlyUser = windowsUser
                     Session("userid") = onlyUser
-                    lblUsername.Text = "User Logged: " + onlyUser
+                    'lblUsername.Text = "User Logged: " + onlyUser
 
                 End If
 

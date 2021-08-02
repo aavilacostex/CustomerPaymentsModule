@@ -40,6 +40,15 @@ Public Class CustPaymentModule
                     End If
                 Else
                     Log.Info("Starting Customer Payments")
+
+                    If Session("UserDataText") IsNot Nothing Then
+                        Dim welcomeMsg = ConfigurationManager.AppSettings("UserWelcome")
+                        Dim userData = DirectCast(Session("UserDataText"), String)
+                        lblUserLogged.Text = String.Format(welcomeMsg, userData.Split("-")(1).Trim(), userData.Split("-")(0).Trim())
+                    Else
+                        FormsAuthentication.RedirectToLoginPage()
+                    End If
+
                     Dim dsResult As DataSet = New DataSet()
                     fill_Page_Size(ddlPageSize)
                     Session("PageSize") = If(Not String.IsNullOrEmpty(ConfigurationManager.AppSettings("PageSize")), ConfigurationManager.AppSettings("PageSize"), "1000")
@@ -74,6 +83,32 @@ Public Class CustPaymentModule
     End Sub
 
 #End Region
+
+    Protected Sub lnkLogout_Click() Handles lnkLogout.Click
+        Try
+            FormsAuthentication.SignOut()
+            Session.Abandon()
+            coockieWork()
+            Session("UserLoginData") = Nothing
+            FormsAuthentication.RedirectToLoginPage()
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub coockieWork()
+        Try
+
+            Dim cookie1 As HttpCookie = New HttpCookie(FormsAuthentication.FormsCookieName, "")
+            cookie1.HttpOnly = True
+            cookie1.Expires = DateTime.Now.AddYears(-1)
+            Response.Cookies.Add(cookie1)
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
 #Region "Main Load of Data"
 

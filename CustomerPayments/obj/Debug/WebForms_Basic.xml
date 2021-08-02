@@ -46,6 +46,24 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:CustomerPayments.CustPaymentModule._lblUserLogged">
+<summary>
+lblUserLogged control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments.CustPaymentModule._lnkLogout">
+<summary>
+lnkLogout control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:CustomerPayments.CustPaymentModule._btnNewItem">
 <summary>
 btnNewItem control.
@@ -391,6 +409,69 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:CustomerPayments.CustPaymentModule._grvCustPayment">
 <summary>
 grvCustPayment control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments._Default._lblUserLogged">
+<summary>
+lblUserLogged control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments._Default._lnkLogout">
+<summary>
+lnkLogout control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments.Login._UserName">
+<summary>
+UserName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments.Login._frUserLogin">
+<summary>
+frUserLogin control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments.Login._Password">
+<summary>
+Password control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments.Login._rfPassword">
+<summary>
+rfPassword control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments.Login._btnLoginUser">
+<summary>
+btnLoginUser control.
 </summary>
 <remarks>
 Auto-generated field.

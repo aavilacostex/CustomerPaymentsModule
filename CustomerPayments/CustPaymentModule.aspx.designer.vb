@@ -23,6 +23,24 @@ Partial Public Class CustPaymentModule
     Protected WithEvents updatepnl As Global.System.Web.UI.UpdatePanel
 
     '''<summary>
+    '''lblUserLogged control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUserLogged As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lnkLogout control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkLogout As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''btnNewItem control.
     '''</summary>
     '''<remarks>
