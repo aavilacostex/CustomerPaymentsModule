@@ -433,6 +433,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:CustomerPayments.Login._lblOptionalMessage">
+<summary>
+lblOptionalMessage control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:CustomerPayments.Login._UserName">
 <summary>
 UserName control.
@@ -478,9 +487,27 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:CustomerPayments.Login._hdSessionExpired">
+<summary>
+hdSessionExpired control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:CustomerPayments.SiteMaster._lblUsername">
 <summary>
 lblUsername control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments.SiteMaster._lnkLogout">
+<summary>
+lnkLogout control.
 </summary>
 <remarks>
 Auto-generated field.

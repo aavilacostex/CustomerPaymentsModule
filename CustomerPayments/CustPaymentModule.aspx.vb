@@ -24,10 +24,22 @@ Public Class CustPaymentModule
         Dim sel As Integer = -1
         Dim fullData As Boolean = False
         Dim exMessage As String = " "
+        'Session("userid") = Nothing 'forcing session timeout
+        Dim url As String = Nothing
         Try
+
+            If Session("userid") Is Nothing Then
+                url = String.Format("Login.aspx?data={0}", "Session Expired!")
+                Response.Redirect(url, False)
+            End If
+
             If Not IsPostBack Then
 
                 Dim flag = GetAccessByUsers(sel, fullData)
+
+                'condition to allow redirection when session expired
+                flag = If(String.IsNullOrEmpty(url), flag, True)
+
                 If Not flag Then
                     If sel = 0 Then
                         Dim usr = If(Session("userid") IsNot Nothing, Session("userid").ToString(), "N/A")
@@ -41,12 +53,13 @@ Public Class CustPaymentModule
                 Else
                     Log.Info("Starting Customer Payments")
 
-                    If Session("UserDataText") IsNot Nothing Then
+                    If Session("userid") IsNot Nothing Then
                         Dim welcomeMsg = ConfigurationManager.AppSettings("UserWelcome")
-                        Dim userData = DirectCast(Session("UserDataText"), String)
-                        lblUserLogged.Text = String.Format(welcomeMsg, userData.Split("-")(1).Trim(), userData.Split("-")(0).Trim())
+                        lblUserLogged.Text = String.Format(welcomeMsg, Session("username").ToString().Trim(), Session("userid").ToString().Trim())
                     Else
-                        FormsAuthentication.RedirectToLoginPage()
+                        If String.IsNullOrEmpty(url) Then
+                            FormsAuthentication.RedirectToLoginPage()
+                        End If
                     End If
 
                     Dim dsResult As DataSet = New DataSet()
@@ -83,32 +96,6 @@ Public Class CustPaymentModule
     End Sub
 
 #End Region
-
-    Protected Sub lnkLogout_Click() Handles lnkLogout.Click
-        Try
-            FormsAuthentication.SignOut()
-            Session.Abandon()
-            coockieWork()
-            Session("UserLoginData") = Nothing
-            FormsAuthentication.RedirectToLoginPage()
-
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Sub coockieWork()
-        Try
-
-            Dim cookie1 As HttpCookie = New HttpCookie(FormsAuthentication.FormsCookieName, "")
-            cookie1.HttpOnly = True
-            cookie1.Expires = DateTime.Now.AddYears(-1)
-            Response.Cookies.Add(cookie1)
-
-        Catch ex As Exception
-
-        End Try
-    End Sub
 
 #Region "Main Load of Data"
 
@@ -937,6 +924,32 @@ Public Class CustPaymentModule
 #End Region
 
 #Region "Generics"
+
+    Protected Sub lnkLogout_Click() Handles lnkLogout.Click
+        Try
+            FormsAuthentication.SignOut()
+            Session.Abandon()
+            coockieWork()
+            Session("UserLoginData") = Nothing
+            FormsAuthentication.RedirectToLoginPage()
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub coockieWork()
+        Try
+
+            Dim cookie1 As HttpCookie = New HttpCookie(FormsAuthentication.FormsCookieName, "")
+            cookie1.HttpOnly = True
+            cookie1.Expires = DateTime.Now.AddYears(-1)
+            Response.Cookies.Add(cookie1)
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Public Function GenerateDataSetFromObject(obj As Costumer, dt As DataTable) As DataSet
         Dim dsReturn As DataSet = New DataSet()

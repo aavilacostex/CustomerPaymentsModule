@@ -1680,7 +1680,14 @@ input[type=file]::-ms-value {
     margin: 0 auto !important;
 }
 
-#dvMessageLog  .col-md-8 {
+#MainContent_lblOptionalMessage {
+    color: red;
+    font-weight: 600;
+    font-size: 12px;
+    margin: 0 auto !important;
+}
+
+#dvMessageLog .col-md-8 {
     text-align: center !important;
 }
 

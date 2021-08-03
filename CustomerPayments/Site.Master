@@ -98,14 +98,16 @@
                                         <li><a class="dropdown-item" href="CustPaymentModule">Customer Payments</a></li>                                       
                                     </ul>                                    
                                 </li>                                
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown hideProp">
                                     <a class="nav-link dropdown-toggle" href="http://example.com" id="user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <asp:Label ID="lblUsername" Text="" runat="server"></asp:Label>
                                         <%--<asp:LoginName ID="lgLoginName" FormatString="Welcome, {0}"  runat="server" />--%>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="user">
                                         <a class="dropdown-item" href="#">Configuration</a>
-                                        <a class="dropdown-item" href="#">Logout</a>
+                                        <a class="dropdown-item" href="#">
+                                            <asp:LinkButton ID="lnkLogout" Text="Logout" OnClick="lnkLogout_Click" runat="server"></asp:LinkButton> 
+                                        </a>
                                     </div>
                                 </li>
                             </ul>

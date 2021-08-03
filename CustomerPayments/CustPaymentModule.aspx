@@ -392,7 +392,7 @@
                 <asp:HiddenField ID="hdEndData" Value="" runat="server" />
             </div>
 
-            <div id="rwGetPayments" class="container-fluid">
+            <div id="rwGetPayments" class="container-fluid hideProp">
                 <div class="row">                    
                     <div class="col-md-4">
                         <div id="rowPageSize" class="row">

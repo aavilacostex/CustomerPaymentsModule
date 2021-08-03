@@ -16,7 +16,6 @@ C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\Cu
 C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Debug\CustomerPayments.UTIL.xml
 C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Debug\IBM.Data.DB2.iSeries.dll
 C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Debug\IBM.Data.DB2.iSeries.xml
-C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.vbprojAssemblyReference.cache
 C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.Resources.resources
 C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.vbproj.GenerateResource.cache
 C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Debug\CustomerPayments.UTIL.vbproj.CoreCompileInputs.cache

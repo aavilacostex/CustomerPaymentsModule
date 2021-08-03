@@ -2,16 +2,24 @@
     Inherits Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
-
+        'Session("userid") = Nothing 'forcing session timeout
+        Dim url As String = Nothing
         Try
+
+            If Session("userid") Is Nothing Then
+                url = String.Format("Login.aspx?data={0}", "Session Expired!")
+                Response.Redirect(url, False)
+            End If
+
             If Not IsPostBack Then
 
-                If Session("UserDataText") IsNot Nothing Then
+                If Session("userid") IsNot Nothing Then
                     Dim welcomeMsg = ConfigurationManager.AppSettings("UserWelcome")
-                    Dim userData = DirectCast(Session("UserDataText"), String)
-                    lblUserLogged.Text = String.Format(welcomeMsg, userData.Split("-")(1).Trim(), userData.Split("-")(0).Trim())
+                    lblUserLogged.Text = String.Format(welcomeMsg, Session("username").ToString().Trim(), Session("userid").ToString().Trim())
                 Else
-                    FormsAuthentication.RedirectToLoginPage()
+                    If String.IsNullOrEmpty(url) Then
+                        FormsAuthentication.RedirectToLoginPage()
+                    End If
                 End If
 
             End If
