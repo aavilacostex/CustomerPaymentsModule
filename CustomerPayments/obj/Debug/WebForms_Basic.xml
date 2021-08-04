@@ -370,6 +370,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:CustomerPayments.CustPaymentModule._hdWelcomeMess">
+<summary>
+hdWelcomeMess control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:CustomerPayments.CustPaymentModule._lblText1">
 <summary>
 lblText1 control.
@@ -544,6 +553,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:CustomerPayments.SiteMaster._ventanaModal">
 <summary>
 ventanaModal control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments.SiteMaster._hdShowMenu">
+<summary>
+hdShowMenu control.
 </summary>
 <remarks>
 Auto-generated field.

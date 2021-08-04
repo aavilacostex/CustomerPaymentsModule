@@ -1490,7 +1490,7 @@ input[type="color"]:focus,
 }
 
 .hideProp {
-    display: none;
+    display: none !important;
 }
 
 .label-style {
@@ -1681,9 +1681,9 @@ input[type=file]::-ms-value {
 }
 
 #MainContent_lblOptionalMessage {
-    color: red;
-    font-weight: 600;
-    font-size: 12px;
+    color: red !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
     margin: 0 auto !important;
 }
 

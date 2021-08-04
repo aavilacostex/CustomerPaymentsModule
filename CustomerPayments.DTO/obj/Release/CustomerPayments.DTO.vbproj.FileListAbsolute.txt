@@ -1,0 +1,16 @@
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\bin\Release\CustomerPayments.DTO.dll
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\bin\Release\CustomerPayments.DTO.pdb
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\bin\Release\CustomerPayments.DTO.xml
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\bin\Release\CustomerPayments.UTIL.dll
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\bin\Release\IBM.Data.DB2.iSeries.dll
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\bin\Release\CustomerPayments.UTIL.pdb
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\bin\Release\CustomerPayments.UTIL.xml
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\bin\Release\IBM.Data.DB2.iSeries.xml
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\obj\Release\CustomerPayments.DTO.vbprojAssemblyReference.cache
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\obj\Release\CustomerPayments.DTO.Resources.resources
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\obj\Release\CustomerPayments.DTO.vbproj.GenerateResource.cache
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\obj\Release\CustomerPayments.DTO.vbproj.CoreCompileInputs.cache
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\obj\Release\CustomerPayments.DTO.vbproj.CopyComplete
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\obj\Release\CustomerPayments.DTO.dll
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\obj\Release\CustomerPayments.DTO.xml
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.DTO\obj\Release\CustomerPayments.DTO.pdb

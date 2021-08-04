@@ -31,6 +31,10 @@ Public Class CustPaymentModule
             If Session("userid") Is Nothing Then
                 url = String.Format("Login.aspx?data={0}", "Session Expired!")
                 Response.Redirect(url, False)
+            Else
+                Dim welcomeMsg = ConfigurationManager.AppSettings("UserWelcome")
+                lblUserLogged.Text = String.Format(welcomeMsg, Session("username").ToString().Trim(), Session("userid").ToString().Trim())
+                hdWelcomeMess.Value = lblUserLogged.Text
             End If
 
             If Not IsPostBack Then
@@ -38,29 +42,32 @@ Public Class CustPaymentModule
                 Dim flag = GetAccessByUsers(sel, fullData)
 
                 'condition to allow redirection when session expired
-                flag = If(String.IsNullOrEmpty(url), flag, True)
-
+                'flag = If(String.IsNullOrEmpty(url), flag, True)
+                'Session("userid") = "AAVILA"
+                'Session("username") = "Alexia Avila"
+                'flag = True
                 If Not flag Then
                     If sel = 0 Then
                         Dim usr = If(Session("userid") IsNot Nothing, Session("userid").ToString(), "N/A")
-                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "User: " + usr, " User is not authorized to access to WL. Time: " + DateTime.Now.ToString())
-                        Response.Redirect("http://www.costex.com", False)
+                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "User: " + usr, " User is not authorized to access to Customer Payment Module. Time: " + DateTime.Now.ToString())
+                        Response.Redirect("http://svrwebapps.costex.com/BaseProject/default.aspx", False)
                     Else
                         Dim usr = If(Session("userid") IsNot Nothing, Session("userid").ToString(), "N/A")
-                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, Nothing, "There is not an user detected tryng to access to WL. Time: " + DateTime.Now.ToString())
+                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, Nothing, "There is not an user detected tryng to access to Customer Payment Module. Time: " + DateTime.Now.ToString())
                         Response.Redirect("http://www.costex.com", False)
                     End If
                 Else
                     Log.Info("Starting Customer Payments")
 
-                    If Session("userid") IsNot Nothing Then
-                        Dim welcomeMsg = ConfigurationManager.AppSettings("UserWelcome")
-                        lblUserLogged.Text = String.Format(welcomeMsg, Session("username").ToString().Trim(), Session("userid").ToString().Trim())
-                    Else
-                        If String.IsNullOrEmpty(url) Then
-                            FormsAuthentication.RedirectToLoginPage()
-                        End If
-                    End If
+                    'If Session("userid") IsNot Nothing Then
+                    '    Dim welcomeMsg = ConfigurationManager.AppSettings("UserWelcome")
+                    '    lblUserLogged.Text = String.Format(welcomeMsg, Session("username").ToString().Trim(), Session("userid").ToString().Trim())
+                    '    hdWelcomeMess.Value = lblUserLogged.Text
+                    'Else
+                    '    If String.IsNullOrEmpty(url) Then
+                    '        FormsAuthentication.RedirectToLoginPage()
+                    '    End If
+                    'End If
 
                     Dim dsResult As DataSet = New DataSet()
                     fill_Page_Size(ddlPageSize)
@@ -90,7 +97,8 @@ Public Class CustPaymentModule
             writeComputerEventLog(ex.Message)
 
             exMessage = ex.ToString + ". " + ex.Message + ". " + ex.ToString
-            writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "User Logged In Customer Payments App: " + Session("userid").ToString(), "Login at time: " + DateTime.Now.ToString())
+            Dim usr = If(Session("userid") IsNot Nothing, Session("userid").ToString(), "N/A")
+            writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Exception, "An Exception occurs: " + ex.Message + " for the user: " + usr, " at time: " + DateTime.Now.ToString())
         End Try
 
     End Sub
@@ -1158,10 +1166,18 @@ Public Class CustPaymentModule
                     If Not String.IsNullOrEmpty(authUser) Then
 
                         fullData = If(LCase(validUsers.Trim()).Contains(LCase(authUser.Trim())), True, False)
+
+                        If Not fullData Then
+                            sel = 0
+                            flag = False
+                        Else
+                            flag = True
+                        End If
+
                         'fullData = False 'test remove
                         'Session("userid") = user
                         'full query -- >
-                        flag = True
+                        'flag = True
                         Return flag
                     Else
                         'test

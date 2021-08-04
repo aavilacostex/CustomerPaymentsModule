@@ -347,6 +347,15 @@ Partial Public Class CustPaymentModule
     Protected WithEvents hdEndData As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
+    '''hdWelcomeMess control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hdWelcomeMess As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''lblText1 control.
     '''</summary>
     '''<remarks>

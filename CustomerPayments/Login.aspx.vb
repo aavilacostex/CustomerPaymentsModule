@@ -6,19 +6,23 @@ Public Class Login
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Try
-            If Not IsPostBack Then
-                If Request.QueryString.Count > 0 And Request.QueryString("data") IsNot Nothing Then
-                    Dim prevUrl = Request.QueryString("data").ToString()
-                    If Not String.IsNullOrEmpty(prevUrl) Then
-                        lblOptionalMessage.Text = prevUrl
-                    Else
-                        lblOptionalMessage.Text = ""
-                    End If
-                End If
-            Else
+        If Session("userid") IsNot Nothing Then
+            Response.Redirect("CustPaymentModule.aspx", False)
+        End If
 
-            End If
+        Try
+            'If Not IsPostBack Then
+            '    If Request.QueryString.Count > 0 And Request.QueryString("data") IsNot Nothing Then
+            '        Dim prevUrl = Request.QueryString("data").ToString()
+            '        If Not String.IsNullOrEmpty(prevUrl) Then
+            '            lblOptionalMessage.Text = prevUrl
+            '        Else
+            '            lblOptionalMessage.Text = ""
+            '        End If
+            '    End If
+            'Else
+
+            'End If
         Catch ex As Exception
 
         End Try

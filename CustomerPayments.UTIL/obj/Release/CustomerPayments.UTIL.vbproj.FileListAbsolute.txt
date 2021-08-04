@@ -1,0 +1,13 @@
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Release\CustomerPayments.UTIL.dll
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Release\CustomerPayments.UTIL.pdb
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Release\CustomerPayments.UTIL.xml
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Release\IBM.Data.DB2.iSeries.dll
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\bin\Release\IBM.Data.DB2.iSeries.xml
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Release\CustomerPayments.UTIL.vbprojAssemblyReference.cache
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Release\CustomerPayments.UTIL.Resources.resources
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Release\CustomerPayments.UTIL.vbproj.GenerateResource.cache
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Release\CustomerPayments.UTIL.vbproj.CoreCompileInputs.cache
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Release\CustomerPayments.UTIL.vbproj.CopyComplete
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Release\CustomerPayments.UTIL.dll
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Release\CustomerPayments.UTIL.xml
+C:\GitServer\ProductionProjects\CustomerPaymentsModule\CustomerPaymentsModule\CustomerPayments.UTIL\obj\Release\CustomerPayments.UTIL.pdb

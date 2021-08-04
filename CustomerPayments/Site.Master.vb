@@ -15,7 +15,19 @@ Public Class SiteMaster
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         Dim methodMessage As String = Nothing
+        Dim url As String = Nothing
         Try
+
+            If Session("userid") Is Nothing Then
+                'url = String.Format("Login.aspx?data={0}", "Session Expired!")
+                'Response.Redirect(url, False)
+                hdShowMenu.Value = "0"
+            Else
+                Dim usernam = If(Session("userid") IsNot Nothing, Session("username").ToString(), "")
+                lblUsername.Text = Session("userid").ToString() + "-" + usernam.Trim()
+                hdShowMenu.Value = "1"
+            End If
+
             If Not IsPostBack() Then
                 'Log.Info("Starting Process")
                 'Dim windowsUser = System.Web.HttpContext.Current.User.Identity.Name
@@ -57,12 +69,17 @@ Public Class SiteMaster
                 'End If
 
                 'writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "User Logged In CustomerPayments: " + Session("userid").ToString(), "Login at time: " + DateTime.Now.ToString())
+
+            Else
+
             End If
 
         Catch ex As Exception
             Log.Error(strLogCadenaCabecera + ".." + ex.Message)
             writeComputerEventLog(ex.Message)
-            writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Exception, ex.Message + ". " + ex.ToString(), "At time: " + DateTime.Now.ToString())
+
+            Dim usr = If(Session("userid") IsNot Nothing, Session("userid").ToString(), "N/A")
+            writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Exception, "An Exception occurs: " + ex.Message + " for the user: " + usr, " at time: " + DateTime.Now.ToString())
         End Try
     End Sub
 

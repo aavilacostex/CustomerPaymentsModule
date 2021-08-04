@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\inetpub\wwwroot\CustomerPayments</_PublishTargetUrl>
-    <History>True|2021-06-29T16:38:54.5711869Z;True|2021-06-29T11:57:55.3071439-04:00;</History>
+    <History>True|2021-08-03T16:10:26.2337643Z;True|2021-06-29T12:38:54.5711869-04:00;True|2021-06-29T11:57:55.3071439-04:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="About.aspx">
@@ -33,34 +33,34 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/16/2020 09:59:08</publishTime>
     </File>
     <File Include="bin/CustomerPayments.BL.dll">
-      <publishTime>06/29/2021 12:38:06</publishTime>
+      <publishTime>08/03/2021 12:09:02</publishTime>
     </File>
     <File Include="bin/CustomerPayments.BL.pdb">
-      <publishTime>06/29/2021 12:38:06</publishTime>
+      <publishTime>08/03/2021 12:09:02</publishTime>
     </File>
     <File Include="bin/CustomerPayments.DAL.dll">
-      <publishTime>06/29/2021 12:38:05</publishTime>
+      <publishTime>08/03/2021 12:09:01</publishTime>
     </File>
     <File Include="bin/CustomerPayments.DAL.pdb">
-      <publishTime>06/29/2021 12:38:05</publishTime>
+      <publishTime>08/03/2021 12:09:01</publishTime>
     </File>
     <File Include="bin/CustomerPayments.dll">
-      <publishTime>06/29/2021 12:38:10</publishTime>
+      <publishTime>08/03/2021 12:09:06</publishTime>
     </File>
     <File Include="bin/CustomerPayments.DTO.dll">
-      <publishTime>06/29/2021 12:38:04</publishTime>
+      <publishTime>08/03/2021 12:09:01</publishTime>
     </File>
     <File Include="bin/CustomerPayments.DTO.pdb">
-      <publishTime>06/29/2021 12:38:04</publishTime>
+      <publishTime>08/03/2021 12:09:01</publishTime>
     </File>
     <File Include="bin/CustomerPayments.pdb">
-      <publishTime>06/29/2021 12:38:10</publishTime>
+      <publishTime>08/03/2021 12:09:06</publishTime>
     </File>
     <File Include="bin/CustomerPayments.UTIL.dll">
-      <publishTime>06/29/2021 12:38:03</publishTime>
+      <publishTime>08/03/2021 12:09:00</publishTime>
     </File>
     <File Include="bin/CustomerPayments.UTIL.pdb">
-      <publishTime>06/29/2021 12:38:03</publishTime>
+      <publishTime>08/03/2021 12:09:00</publishTime>
     </File>
     <File Include="bin/DocumentFormat.OpenXml.dll">
       <publishTime>06/06/2017 22:59:22</publishTime>
@@ -192,7 +192,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/11/2014 15:26:04</publishTime>
     </File>
     <File Include="bin/WebForms_Basic.xml">
-      <publishTime>06/29/2021 12:38:10</publishTime>
+      <publishTime>08/03/2021 12:09:06</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>
@@ -240,13 +240,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/01/2021 16:59:47</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>06/15/2021 11:41:44</publishTime>
+      <publishTime>08/03/2021 11:18:57</publishTime>
     </File>
     <File Include="CustPaymentModule.aspx">
-      <publishTime>06/29/2021 12:36:47</publishTime>
+      <publishTime>08/03/2021 12:08:54</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>05/27/2021 16:46:00</publishTime>
+      <publishTime>08/02/2021 17:10:52</publishTime>
     </File>
     <File Include="Download.ashx">
       <publishTime>06/04/2021 15:13:42</publishTime>
@@ -286,6 +286,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Images/wait1.gif">
       <publishTime>11/23/2015 16:50:29</publishTime>
+    </File>
+    <File Include="Login.aspx">
+      <publishTime>08/03/2021 09:42:49</publishTime>
     </File>
     <File Include="Scripts/bootstrap-filestyle.min.js">
       <publishTime>03/04/2015 11:41:09</publishTime>
@@ -690,7 +693,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/27/2021 16:10:08</publishTime>
     </File>
     <File Include="Site.Master">
-      <publishTime>06/04/2021 15:29:45</publishTime>
+      <publishTime>08/03/2021 11:52:09</publishTime>
     </File>
     <File Include="Site.Mobile.Master">
       <publishTime>05/27/2021 16:08:52</publishTime>
@@ -699,7 +702,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/27/2021 16:08:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/29/2021 12:38:44</publishTime>
+      <publishTime>08/03/2021 12:10:18</publishTime>
     </File>
   </ItemGroup>
 </Project>
