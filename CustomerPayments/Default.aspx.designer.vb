@@ -14,6 +14,42 @@ Option Explicit On
 Partial Public Class _Default
 
     '''<summary>
+    '''hdUserid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hdUserid As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''hdPass control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hdPass As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''hdWelcomeMess control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hdWelcomeMess As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''pepe control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pepe As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''lblUserLogged control.
     '''</summary>
     '''<remarks>

@@ -14,13 +14,23 @@ Public Class _Default
         Try
 
             If Session("userid") Is Nothing Then
+
+                'ScriptManager.RegisterStartupScript(Me, Page.GetType, "Message", "GetLocalDB()", True)
+
                 url = String.Format("Login.aspx?data={0}", "Session Expired!")
+                Session("url") = url
                 Response.Redirect(url, False)
+
             Else
+                Dim welcomeMsg = ConfigurationManager.AppSettings("UserWelcome")
+                lblUserLogged.Text = String.Format(welcomeMsg, Session("username").ToString().Trim(), Session("userid").ToString().Trim())
+                hdWelcomeMess.Value = lblUserLogged.Text
                 Response.Redirect("CustPaymentModule.aspx", False)
             End If
 
             If Not IsPostBack Then
+
+                'ScriptManager.RegisterStartupScript(Me, Page.GetType, "Message", "GetLocalDB()", True)
 
                 'If Session("userid") IsNot Nothing Then
                 '    Dim welcomeMsg = ConfigurationManager.AppSettings("UserWelcome")
@@ -67,6 +77,17 @@ Public Class _Default
 
         End Try
     End Sub
+
+    Public Sub SendMessage(methodMessage As String, detailInfo As String)
+        ScriptManager.RegisterStartupScript(Me, Page.GetType, "Message", "messageFormSubmitted('" & methodMessage & " ', '" & detailInfo & "')", True)
+    End Sub
+
+    Structure messageType
+        Const success = "success"
+        Const warning = "warning"
+        Const info = "info"
+        Const [Error] = "Error"
+    End Structure
 
 #Region "Logs"
 

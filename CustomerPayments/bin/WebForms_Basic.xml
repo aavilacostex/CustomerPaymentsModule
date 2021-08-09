@@ -424,6 +424,42 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:CustomerPayments._Default._hdUserid">
+<summary>
+hdUserid control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments._Default._hdPass">
+<summary>
+hdPass control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments._Default._hdWelcomeMess">
+<summary>
+hdWelcomeMess control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:CustomerPayments._Default._pepe">
+<summary>
+pepe control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:CustomerPayments._Default._lblUserLogged">
 <summary>
 lblUserLogged control.

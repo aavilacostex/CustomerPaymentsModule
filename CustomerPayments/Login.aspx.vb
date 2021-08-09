@@ -6,6 +6,7 @@ Public Class Login
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+
         If Session("userid") IsNot Nothing Then
             Response.Redirect("CustPaymentModule.aspx", False)
         End If

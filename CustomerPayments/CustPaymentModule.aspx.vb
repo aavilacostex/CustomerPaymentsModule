@@ -1,4 +1,6 @@
 ﻿Imports System.ComponentModel
+Imports System.DirectoryServices
+Imports System.DirectoryServices.AccountManagement
 Imports System.Globalization
 Imports System.IO
 Imports System.Reflection
@@ -28,6 +30,23 @@ Public Class CustPaymentModule
         Dim url As String = Nothing
         Try
 
+            'If Request.QueryString.Count > 0 Then
+
+            '    If Request.QueryString("valor1") IsNot Nothing And Request.QueryString("valor2") IsNot Nothing And Request.QueryString("valor3") IsNot Nothing Then
+
+            '        Dim userid = Request.QueryString("valor1").ToString()
+            '        Dim passid = Request.QueryString("valor2").ToString()
+            '        Dim username = Request.QueryString("valor3").ToString()
+
+            '        Session("userid") = userid
+            '        Session("passid") = passid
+            '        Session("username") = username
+
+            '    End If
+
+            'End If
+
+
             If Session("userid") Is Nothing Then
                 url = String.Format("Login.aspx?data={0}", "Session Expired!")
                 Response.Redirect(url, False)
@@ -39,6 +58,13 @@ Public Class CustPaymentModule
 
             If Not IsPostBack Then
 
+                'If Not ValidationCred() Then
+                '    Dim usr = If(Session("userid") IsNot Nothing, Session("userid").ToString(), "N/A")
+                '    writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, Nothing, "Error in the user authentication. Time: " + DateTime.Now.ToString())
+                '    Response.Redirect("http://www.costex.com", False)
+                '    Exit Sub
+                'End If
+
                 Dim flag = GetAccessByUsers(sel, fullData)
 
                 'condition to allow redirection when session expired
@@ -46,6 +72,7 @@ Public Class CustPaymentModule
                 'Session("userid") = "AAVILA"
                 'Session("username") = "Alexia Avila"
                 'flag = True
+
                 If Not flag Then
                     If sel = 0 Then
                         Dim usr = If(Session("userid") IsNot Nothing, Session("userid").ToString(), "N/A")
@@ -1765,6 +1792,71 @@ Public Class CustPaymentModule
         Dim userid = If(DirectCast(Session("userid"), String) IsNot Nothing, DirectCast(Session("userid"), String), "N/A")
         objLog.WriteLog(strLevel, "CTPSystem" & strLevel, strLogCadena, userid, strMessage, strDetails)
     End Sub
+
+#End Region
+
+#Region "Domain Validation"
+
+    Protected Function ValidationCred() As Boolean
+        Dim methodMessage As String = Nothing
+        Dim sr As SearchResult = Nothing
+        Dim dct As Dictionary(Of String, String) = New Dictionary(Of String, String)()
+        Dim strLdap As String = Nothing
+        Dim blResult As Boolean = False
+        Try
+
+            Dim user = Session("userid").ToString()
+            Dim pass = Session("passid").ToString()
+
+            Dim blFlag = getLDAPConnectionString("", strLdap, False, True)
+            If blFlag Then
+
+                Using pc As PrincipalContext = New PrincipalContext(ContextType.Domain, strLdap, user, ContextOptions.SimpleBind.ToString())
+                    Dim validCred = pc.ValidateCredentials(user, pass)
+                    If validCred Then
+                        Dim strUser = UserPrincipal.FindByIdentity(New PrincipalContext(ContextType.Domain, strLdap), IdentityType.SamAccountName, user)
+                        If strUser IsNot Nothing Then
+                            blResult = True
+                        End If
+                    End If
+                End Using
+            End If
+
+            Return blResult
+
+        Catch ex As Exception
+            Return blResult
+        End Try
+    End Function
+
+    Private Function getLDAPConnectionString(defSearch As String, ByRef strLdap As String, Optional flag As Boolean = False, Optional method As Boolean = False) As Boolean
+        Dim blResult As Boolean = False
+        strLdap = Nothing
+        'method = false(Directory Services), true(User Principal)
+        Try
+            Dim de As DirectoryEntry = New DirectoryEntry("LDAP://RootDSE")
+            If de IsNot Nothing Then
+
+                If Not method Then
+                    If flag Then
+                        strLdap = "LDAP://" + de.Properties("defaultNamingContext")(0).ToString()
+                    Else
+                        strLdap = de.Properties("defaultNamingContext")(0).ToString()
+                    End If
+                Else
+                    strLdap = de.Properties("ldapServiceName")(0).ToString().Split("@")(1).ToString().Trim()
+                End If
+
+                'strLdap = If(flag, strLdap = "LDAP://" + de.Properties("defaultNamingContext")(0).ToString(), strLdap = de.Properties("defaultNamingContext")(0).ToString())
+                blResult = If(String.IsNullOrEmpty(strLdap), False, True)
+            End If
+
+            Return blResult
+        Catch ex As Exception
+            Dim msg = ex.Message
+            Return blResult
+        End Try
+    End Function
 
 #End Region
 

@@ -312,7 +312,7 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="row">
-                                    <asp:Panel ID="pnOptionalFilters" CssClass="pnFilterStyles" GroupingText="Extra Filters (Optionals)" runat="server">
+                                    <asp:Panel ID="pnOptionalFilters" CssClass="pnFilterStyles" GroupingText="Extra Filters (Optional)" runat="server">
                                         <div id="rowReceiptNo">
                                             <div class="row">
                                                 <div class="col-md-12">
