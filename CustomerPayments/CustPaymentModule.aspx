@@ -47,13 +47,13 @@
                         </div>
                         <div id="loadOptions" class="col-md-4">
                             <div class="row">
-                                <div class="col-md-3" style="display:none">
-                                    <asp:LinkButton ID="btnNewItem" class="boxed-btn-layout btn-rounded" runat="server" >
-                                                            <i class="fa fa-plus fa-1x"" aria-hidden="true"> </i> NEW ITEM
+                                <div class="col-md-3">
+                                    <asp:LinkButton ID="btnNewItem" class="btn-sm boxed-btn-layout btn-rounded" runat="server" >
+                                                            <i class="fa fa-plus fa-1x"" aria-hidden="true"> </i> GENERATE EXCEL NEW
                                                         </asp:LinkButton>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:LinkButton ID="btnGenerateExcel" OnClick="btnExcel_Click" class="boxed-btn-layout btn-rounded" runat="server" >
+                                    <asp:LinkButton ID="btnGenerateExcel" OnClick="btnExcel_Click" class="btn-sm boxed-btn-layout btn-rounded" runat="server" >
                                                             <i class="fa fa-file-excel-o fa-1x" aria-hidden="true"> </i> GENERATE EXCEL
                                                         </asp:LinkButton>
                                 </div>

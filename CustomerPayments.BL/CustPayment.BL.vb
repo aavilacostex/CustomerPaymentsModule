@@ -4,6 +4,20 @@ Imports Microsoft.Win32
 
 Public Class CustPayment : Implements IDisposable
 
+    Public Function GetNewCustPayments(clientNo As String, lstDates As List(Of String), ByRef dsResult As DataSet, ByRef Optional messageOut As String = Nothing) As Integer
+        dsResult = New DataSet()
+        Dim result As Integer = -1
+        Dim exMessage As String = " "
+        Try
+            Dim objDal = New DAL.CustPayment()
+            result = objDal.GetNewCustPayments(clientNo, lstDates, dsResult, messageOut)
+            Return result
+        Catch ex As Exception
+            exMessage = ex.ToString + ". " + ex.Message + ". " + ex.ToString
+            Return result
+        End Try
+    End Function
+
     Public Function GetCustPaymentDataByCliNo(clientNo As String, lstDates As List(Of String), ByRef dsResult As DataSet, ByRef Optional messageOut As String = Nothing) As Integer
         dsResult = New DataSet()
         Dim result As Integer = -1

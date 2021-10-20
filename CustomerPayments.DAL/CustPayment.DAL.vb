@@ -9,6 +9,36 @@ Public Class CustPayment : Implements IDisposable
 
     Shared ReadOnly objLog = New Logs()
 
+    Public Function GetNewCustPayments(clientNo As String, lstDates As List(Of String), ByRef dsResult As DataSet, ByRef Optional messageOut As String = Nothing) As Integer
+        Dim result As Integer = -1
+        'messageOut = Nothing
+        dsResult = New DataSet()
+        Dim exMessage As String = " "
+        Dim query = "with y as ( select a.crgrf# invoice, (select ctpinv.cvtdcdtf(ohdate,'MDY') from qs36f.hordhd2 where ohrcd=1 and  ohcu#=a.CRGCU# 
+                    and ohinno=a.CRGRF# fetch first 1 rows only) invdt, (select sum(OhSl$+OhTx$+ohgl$+ohsp$+ohcod$) from qs36f.hordhd2 where  ohrcd=1 and ohcu#=a.CRGCU# 
+                    and ohinno=a.CRGRF#  group by ohcu#/*,ohinno*/ ) invamt,(a.CRGPD$+a.CRGDS$+a.CRGAJ$) paid, (select ctpinv.cvtdcdtf(CHDBCD,'YMD') from qs36f.crbhd01 where chdbc#=a.crgbc#) paydt 
+                    from qs36f.cshrg01 a where a.CRGBC# IN (SELECT CHDBC# FROM qs36f.crbhd01 WHERE CHDBC#=a.CRGBC# AND CHDSTS='C') 
+                    and a.crgcu#={0})                                                  
+                    select paydt,invdt,invoice,invamt, paid from y where invdt between '{1}' and '{2}' /*and INVOICE = 'H98970'*/   order by 3  "
+
+        Dim resultQuery = String.Format(query, clientNo, lstDates(0), lstDates(1))
+
+        Try
+
+            Dim dsOut = New DataSet()
+            Dim objDatos = New ClsRPGClientHelper()
+            Dim dt As DataTable = New DataTable()
+            result = objDatos.GetDataFromDatabase(resultQuery, dsOut, dt, messageOut)
+            dsResult = dsOut
+            Return result
+
+        Catch ex As Exception
+            exMessage = ex.ToString + ". " + ex.Message + ". " + ex.ToString
+            objLog.writeLog(strLogCadenaCabecera, objLog.ErrorTypeEnum.Exception, ex.Message, ex.ToString())
+            Return result
+        End Try
+    End Function
+
     Public Function GetCustPaymentDataByCliNo(clientNo As String, lstDates As List(Of String), ByRef dsResult As DataSet, ByRef Optional messageOut As String = Nothing) As Integer
         Dim result As Integer = -1
         'messageOut = Nothing

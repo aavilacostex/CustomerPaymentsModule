@@ -252,6 +252,75 @@ Public Class CustPaymentModule
         End Try
     End Sub
 
+    Public Function GetCustPaymentsDataNew(Optional ByRef dsResult As DataSet = Nothing, Optional flag As Boolean = False, Optional dec As Boolean = False, Optional ByRef objCostumer As Costumer = Nothing) As Integer
+        dsResult = New DataSet()
+        Dim dsExtra = New DataSet()
+        Dim result As Integer = -1
+        Dim messageOut As String = Nothing
+        Dim lstDates = New List(Of String)()
+        Dim proc As Boolean = False
+        Dim dtOut As DataTable = New DataTable()
+        Dim exMessage As String = Nothing
+        objCostumer = New Costumer()
+        Try
+            Dim cliNo = txtvendor.Text.Trim()
+            Dim startDate = txtDate.Text
+            Dim endDate = txtDateTo.Text
+
+            lstDates.Add(startDate)
+            lstDates.Add(endDate)
+
+            Using objBL As CustomerPayments.BL.CustPayment = New CustomerPayments.BL.CustPayment()
+
+                If Not dec Then
+                    result = objBL.GetNewCustPayments(cliNo, lstDates, dsResult, messageOut)
+                Else
+                    Dim lstSelection = getSelectedExtraFilter()
+                    result = objBL.GetCustPaymentDataBySelection(dsResult, lstSelection, messageOut)
+                End If
+
+                If result > 0 Then
+                    If dsResult IsNot Nothing Then
+                        If dsResult.Tables(0).Rows.Count > 0 Then
+                            Session("CustPaymentData") = dsResult
+                            If flag Then
+                                AddFiltersToPrincipal(dsResult, proc, dtOut)
+                                If dtOut IsNot Nothing Then
+                                    If dtOut.Rows.Count > 0 Then
+                                        Dim dsNew = New DataSet()
+                                        dsNew.Tables.Add(dtOut)
+                                        dsResult = dsNew
+                                        Session("CustPaymentData") = dsResult
+                                    End If
+                                End If
+                            End If
+                            'If Not proc Then
+
+                            objCostumer = fillObjNew(dsResult.Tables(0))
+                            'Dim dtt = ObjectToDataTable(objGet)
+                            'create a datatable from this object
+                            'loadData(dsResult)
+                            'End If
+
+                            Return result
+                            'Session("CustPaymentData") = dsResult
+                            'Session("CustPaymentBck") = dsResult
+                        End If
+                    End If
+                Else
+                    'loadData(Nothing)
+                    Return result
+                End If
+            End Using
+
+        Catch ex As Exception
+            Log.Info(strLogCadenaCabecera + ".." + ex.Message)
+            exMessage = ex.ToString + ". " + ex.Message + ". " + ex.ToString
+            writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Exception, "Error Ocurred: " + exMessage + " for user " + Session("userid").ToString(), "Occurs at time: " + DateTime.Now.ToString())
+            Return result
+        End Try
+    End Function
+
     Public Function GetCustPaymentsDataPartial(Optional ByRef dsResult As DataSet = Nothing, Optional flag As Boolean = False, Optional dec As Boolean = False, Optional ByRef objCostumer As Costumer = Nothing) As Integer
         dsResult = New DataSet()
         Dim dsExtra = New DataSet()
@@ -603,10 +672,14 @@ Public Class CustPaymentModule
             If Not String.IsNullOrEmpty(vendorNo) And Not String.IsNullOrEmpty(dtValueStart) And Not String.IsNullOrEmpty(dtValueEnd) Then
 
                 If String.IsNullOrEmpty(txtReceiptNo.Text.Trim()) And String.IsNullOrEmpty(txtInvoiceNo.Text.Trim()) Then
+
                     rsReturn = GetCustPaymentsData(dsResult)
+                    'rsReturn = GetCustPaymentsDataNew(dsResult, True, False, objCostumer)
+
                     If rsReturn > 0 Then
 
                         Dim objGet = fillObj(dsResult.Tables(0))
+                        'Dim objGet = objCostumer
 
                         Dim dt As DataTable = New DataTable()
                         dt = dsResult.Tables(0).Clone()
@@ -801,6 +874,127 @@ Public Class CustPaymentModule
         End Try
     End Sub
 
+    Protected Sub btnNewItem_Click(sender As Object, e As EventArgs) Handles btnNewItem.Click
+        Dim exMessage As String = Nothing
+        Dim fileExtension As String = ""
+        Dim fileName As String = ""
+        Dim rsReturn As Integer = -1
+        Dim dsResult = New DataSet()
+        Dim objCostumer = New Costumer()
+        Try
+
+            writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "Start Open excel new for user " + Session("userid").ToString(), "Occurs at time: " + DateTime.Now.ToString())
+            rsReturn = GetCustPaymentsDataNew(dsResult, True, False, objCostumer)
+            If dsResult IsNot Nothing Then
+                If dsResult.Tables(0).Rows.Count > 0 Then
+
+                    'Dim objGet = fillObjNew(dsResult.Tables(0))
+                    Dim objGet = objCostumer
+
+                    Dim dt As DataTable = New DataTable()
+                    dt = dsResult.Tables(0).Clone()
+                    Dim dss = GenerateDataSetFromObjectNew(objGet, dt)
+
+                    Dim pathToProcess = ConfigurationManager.AppSettings("urlTemplateToProcess")
+                    'Dim updUserPath = userPath + "\WishList-Template\"
+                    Dim folderPath = pathToProcess
+                    Dim methodMessage = If(Not String.IsNullOrEmpty(folderPath), "The template document will be downloaded to your documents folder", "There is not a path defined for this document. Call an administrator!!")
+
+                    'Dim userPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                    'Dim folderPath As String = userPath & "\Client-Payments\"
+
+                    writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "Check if path exists", "Occurs at time: " + DateTime.Now.ToString())
+                    If Not Directory.Exists(folderPath) Then
+                        Directory.CreateDirectory(folderPath)
+                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "Path created", "Occurs at time: " + DateTime.Now.ToString())
+                    Else
+                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "Check process" + pathToProcess + ".", "Occurs at time: " + DateTime.Now.ToString())
+                        Dim files = Directory.GetFiles(pathToProcess)
+                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "Check process ok", "Occurs at time: " + DateTime.Now.ToString())
+                        Dim fi = Nothing
+                        If files.Length = 1 Then
+                            writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "file lenght = 1", "Occurs at time: " + DateTime.Now.ToString())
+                            For Each item In files
+                                fi = item
+                                Dim isOpened = IsFileinUse(New FileInfo(fi))
+                                If Not isOpened Then
+                                    File.Delete(item)
+                                    writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "File deleted", "Occurs at time: " + DateTime.Now.ToString())
+                                Else
+                                    SendMessage("Please close the file " & fi & " in order to proceed!", messageType.info)
+                                    Exit Sub
+                                End If
+                            Next
+                        Else
+                            'SendMessage("Please close the file " & fi & " in order to proceed!", messageType.info)
+                            'Exit Sub
+                        End If
+                    End If
+
+                    Using objBL As CustomerPayments.BL.CustPayment = New CustomerPayments.BL.CustPayment()
+                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "Determine Office version", "Occurs at time: " + DateTime.Now.ToString())
+                        fileExtension = objBL.Determine_OfficeVersion()
+                        If String.IsNullOrEmpty(fileExtension) Then
+                            fileExtension = "xlsx"
+                            writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "exit method" + pathToProcess + ".", "Occurs at time: " + DateTime.Now.ToString())
+                            'Exit Sub
+                        End If
+
+                        Dim title As String
+                        title = "Client.Payments.generated.on"
+                        fileName = objBL.adjustDatetimeFormat(title, fileExtension)
+
+                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "Extension and name ok", "Occurs at time: " + DateTime.Now.ToString())
+
+                    End Using
+
+                    Dim fullPath = folderPath + fileName
+
+                    Using wb As New XLWorkbook()
+                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "start save doc", "Occurs at time: " + DateTime.Now.ToString())
+
+                        Try
+                            wb.Worksheets.Add(dss.Tables(0), "ClientPayments")
+
+                            wb.SaveAs(fullPath)
+                        Catch exx As Exception
+                            writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "Error: " + exx.Message + "" + exx.ToString() + ". ", "Occurs at time: " + DateTime.Now.ToString())
+                        End Try
+
+
+                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "end save doc in path " + fullPath + "", "Occurs at time: " + DateTime.Now.ToString())
+                    End Using
+
+                    If File.Exists(fullPath) Then
+
+                        writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "Exist fullpath", "Occurs at time: " + DateTime.Now.ToString())
+
+                        Dim myFile As FileInfo = New FileInfo(fullPath)
+                        If myFile.Exists Then
+                            writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "Exist file", "Occurs at time: " + DateTime.Now.ToString())
+                            Try
+                                'Process.Start("explorer.exe", fullPath)
+                                writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Information, "try to open file", "Occurs at time: " + DateTime.Now.ToString())
+                                Session("PathToDownload") = fullPath
+                                Response.Redirect("Download.ashx", True)
+                                'Process.Start("explorer.EXE", filePath1)
+                            Catch Win32Exception As Win32Exception
+                                writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Exception, "Error Ocurred: " + Win32Exception.Message + " for user " + Session("userid").ToString(), "Occurs at time: " + DateTime.Now.ToString())
+                                Shell("explorer " & fullPath, AppWinStyle.NormalFocus)
+                            Catch ex As Exception
+                                writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Exception, "Error Ocurred: " + ex.Message + " for user " + Session("userid").ToString(), "Occurs at time: " + DateTime.Now.ToString())
+                            End Try
+                        End If
+                    End If
+                    loadData(dss)
+                End If
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     Protected Sub btnExcel_Click(sender As Object, e As EventArgs) Handles btnGenerateExcel.Click
         Dim exMessage As String = Nothing
         Dim fileExtension As String = ""
@@ -985,6 +1179,43 @@ Public Class CustPaymentModule
 
         End Try
     End Sub
+
+    Public Function GenerateDataSetFromObjectNew(obj As Costumer, dt As DataTable) As DataSet
+        Dim dsReturn As DataSet = New DataSet()
+        Try
+            Dim dtTemp = dt.Copy()
+            'Dim customerNo As String = obj.CUSTNO.Trim()
+
+            For Each objR As Receipt In obj.LstReceipt
+
+                For Each objIn As Invoice In objR.LstInvoice
+
+                    Dim dr = dtTemp.NewRow()
+                    'dr("CUSTNO") = customerNo
+                    'dr("receipt") = objR.ReceiptId.Trim()
+                    dr("invoice") = objIn.InvoiceId.Trim()
+                    dr("invdt") = objIn.InvoiceDate.Trim()
+                    dr("invamt") = objIn.InvoiceAmt.Trim()
+                    dr("paydt") = objIn.InvoicePaidDate.Trim()
+                    dr("paid") = objIn.InvoicePaid.Trim()
+                    'dr("balance") = objIn.InvoiceBalance.Trim()
+
+                    dtTemp.Rows.Add(dr)
+
+                Next
+
+                dtTemp.AcceptChanges()
+
+            Next
+
+            dsReturn.Tables.Add(dtTemp)
+            Return dsReturn
+
+        Catch ex As Exception
+            writeLog(strLogCadenaCabecera, Logs.ErrorTypeEnum.Exception, ex.Message, ex.ToString())
+            Return Nothing
+        End Try
+    End Function
 
     Public Function GenerateDataSetFromObject(obj As Costumer, dt As DataTable) As DataSet
         Dim dsReturn As DataSet = New DataSet()
@@ -1599,6 +1830,63 @@ Public Class CustPaymentModule
 
 #Region "Fill Objects"
 
+    Private Function getObjInvFromDwNew(dw As DataRow) As Invoice
+        Dim objInvoice As Invoice = New Invoice()
+
+        Try
+            Dim duplicates = If(Session("DuplicatesInv") IsNot Nothing, DirectCast(Session("DuplicatesInv"), List(Of String)), Nothing)
+            If dw IsNot Nothing Then
+
+                'If dw.Item("invoice").ToString().Trim().Contains("F72298") Then
+                '    Dim pppp = "a"
+                'End If
+
+                objInvoice.InvoiceId = dw.Item("invoice").ToString().Trim()
+                objInvoice.InvoiceDate = dw.Item("invdt").ToString().Trim()
+                objInvoice.InvoiceAmt = dw.Item("invamt").ToString().Trim()
+                objInvoice.InvoicePaidDate = dw.Item("paydt").ToString().Trim()
+                objInvoice.InvoicePaid = dw.Item("paid").ToString().Trim()
+
+                'If duplicates IsNot Nothing Then
+                '    If duplicates.Contains(dw.Item("invoice").ToString().Trim()) Then
+                '        If Session("Dup") IsNot Nothing Then
+                '            If Session("Dup").ToString() <> "0.00" Then
+                '                objInvoice.InvoiceBalance = (Decimal.Parse(Session("Dup").ToString()) - Decimal.Parse(dw.Item("paid").ToString().Trim())).ToString()
+                '                objInvoice.TempBalance = objInvoice.InvoiceBalance
+                '                Session("Dup") = objInvoice.TempBalance
+                '            Else
+                '                Session("Dup") = dw.Item("balance").ToString().Trim()
+                '                objInvoice.InvoiceBalance = dw.Item("balance").ToString().Trim()
+                '                objInvoice.TempBalance = If(String.IsNullOrEmpty(dw.Item("invamt").ToString().Trim()) Or String.IsNullOrEmpty(dw.Item("paid").ToString().Trim()), 0,
+                '                    (Decimal.Parse(dw.Item("invamt").ToString().Trim()) - Decimal.Parse(dw.Item("paid").ToString().Trim())).ToString())
+                '            End If
+                '        Else
+                '            Session("Dup") = dw.Item("balance").ToString().Trim()
+                '            objInvoice.InvoiceBalance = dw.Item("balance").ToString().Trim()
+                '            objInvoice.TempBalance = If(String.IsNullOrEmpty(dw.Item("invamt").ToString().Trim()) Or String.IsNullOrEmpty(dw.Item("paid").ToString().Trim()), 0,
+                '                (Decimal.Parse(dw.Item("invamt").ToString().Trim()) - Decimal.Parse(dw.Item("paid").ToString().Trim())).ToString())
+                '        End If
+                '    Else
+                '        objInvoice.InvoiceBalance = dw.Item("balance").ToString().Trim()
+                '        objInvoice.TempBalance = If(String.IsNullOrEmpty(dw.Item("invamt").ToString().Trim()) Or String.IsNullOrEmpty(dw.Item("paid").ToString().Trim()), 0,
+                '            (Decimal.Parse(dw.Item("invamt").ToString().Trim()) - Decimal.Parse(dw.Item("paid").ToString().Trim())).ToString())
+                '        Session("Dup") = Nothing
+                '    End If
+                'Else
+                '    objInvoice.InvoiceBalance = dw.Item("balance").ToString().Trim()
+                '    objInvoice.TempBalance = If(String.IsNullOrEmpty(dw.Item("invamt").ToString().Trim()) Or String.IsNullOrEmpty(dw.Item("paid").ToString().Trim()), 0,
+                '        (Decimal.Parse(dw.Item("invamt").ToString().Trim()) - Decimal.Parse(dw.Item("paid").ToString().Trim())).ToString())
+                '    Session("Dup") = Nothing
+                'End If
+
+                Return objInvoice
+            End If
+        Catch ex As Exception
+            Return Nothing
+        End Try
+
+    End Function
+
     Private Function getObjInvFromDw(dw As DataRow) As Invoice
         Dim objInvoice As Invoice = New Invoice()
 
@@ -1656,12 +1944,33 @@ Public Class CustPaymentModule
 
     End Function
 
+    Private Function addEmptyRowToEndNew(dt As DataTable) As DataTable
+        Dim dtTemp As DataTable = New DataTable()
+        Try
+            dtTemp = dt.Copy()
+            Dim dr = dtTemp.NewRow()
+            'dr("CUSTNO") = "0"
+            'dr("receipt") = "0"
+            dr("invoice") = "0"
+            dr("invdt") = DateTime.Now.ToString()
+            dr("invamt") = "0"
+            dr("paydt") = DateTime.Now.ToString()
+            dr("paid") = "0"
+            'dr("balance") = "0"
+
+            dtTemp.Rows.Add(dr)
+            Return dtTemp
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     Private Function addEmptyRowToEnd(dt As DataTable) As DataTable
         Dim dtTemp As DataTable = New DataTable()
         Try
             dtTemp = dt.Copy()
             Dim dr = dtTemp.NewRow()
-            dr("CUSTNO") = dt.Rows(0).Item("CUSTNo").ToString().Trim()
+            dr("CUSTNO") = "0"
             dr("receipt") = "0"
             dr("invoice") = "0"
             dr("invdt") = DateTime.Now.ToString()
@@ -1675,6 +1984,112 @@ Public Class CustPaymentModule
         Catch ex As Exception
             Return Nothing
         End Try
+    End Function
+
+    Private Function fillObjNew(dt As DataTable) As Costumer
+        Dim exMessage As String = Nothing
+        Dim objCostumer = Nothing
+        Dim lstCostumer = New List(Of Costumer)()
+        Session("Dup") = Nothing
+        Dim lstDup = New List(Of String)()
+
+        Try
+
+#Region "Get Duplicate Invoices"
+
+            Dim ds = New DataSet()
+            Dim dt1 = dt.Copy()
+            ds.Tables.Add(dt1)
+            GetMoreThanOneInvoiceByReceipt(ds, lstDup)
+
+#End Region
+
+#Region "Obj Declaration"
+
+            Dim objCostNo = New Costumer()
+            Dim objReceipt = New Receipt()
+            Dim objInvoice = New Invoice()
+            Dim lstReceipt = New List(Of Receipt)()
+            Dim lstInvoice = New List(Of Invoice)()
+
+            objReceipt.LstInvoice = lstInvoice
+            objCostNo.LstReceipt = lstReceipt
+
+#End Region
+            Dim currentReceipt As String = Nothing
+            Dim currentInvoice As String = Nothing
+            'Dim currentCostumer As String = dt.Rows(0).Item("CUSTNO").ToString().Trim()
+
+            Dim dtFull = addEmptyRowToEndNew(dt)
+
+            'currentReceipt = dtFull.Rows(0).Item("receipt").ToString().Trim()
+            For Each dw As DataRow In dtFull.Rows
+
+                'If lstDup IsNot Nothing Then
+                '    If lstDup.Contains(dw.Item("invoice").ToString().Trim()) Then
+
+                'If dw.Item("receipt").ToString().Trim().Equals(currentReceipt) Then
+                'objReceipt.ReceiptId = currentReceipt
+                'Dim objProc = getObjInvFromDw(dw)
+
+                'If objProc.InvoiceId.Contains("F72298") Then
+                '    Dim pp = objProc.InvoiceId
+                'End If
+
+                'objReceipt.LstInvoice.Add(objProc)
+                'Else
+                'objReceipt.LstInvoice = lstInvoice
+                objReceipt.InvoiceQty = If(objReceipt.LstInvoice IsNot Nothing, objReceipt.LstInvoice.Count.ToString(), 0)
+                objCostNo.LstReceipt.Add(objReceipt)
+
+                'Session("Dup") = If(objCostNo.LstReceipt.AsEnumerable().Any(Function(ss) ss.ObjInvoice.InvoiceId = objReceipt.LstInvoice(CInt(objReceipt.InvoiceQty) - 1).InvoiceId And
+                '                                                      objReceipt.LstInvoice(CInt(objReceipt.InvoiceQty) - 1).InvoiceBalance <> 0),
+                '                                                        objReceipt.LstInvoice(CInt(objReceipt.InvoiceQty) - 1).InvoiceBalance, "0.00")
+
+                'Session("Dup") = If(objCostNo.LstReceipt.AsEnumerable().Any(Function(ss) ss.LstInvoice.AsEnumerable().Any(Function(dd) dd.InvoiceId = objReceipt.LstInvoice(CInt(objReceipt.InvoiceQty) - 1).InvoiceId) And
+                'objReceipt.LstInvoice(CInt(objReceipt.InvoiceQty) - 1).InvoiceBalance <> 0), objReceipt.LstInvoice(CInt(objReceipt.InvoiceQty) - 1).InvoiceBalance, "0.00")
+
+                'objCostNo.CUSTNO = If(String.IsNullOrEmpty(txtvendor.Text.Trim()), currentCostumer, txtvendor.Text.Trim())
+                'currentReceipt = dw.Item("receipt").ToString().Trim()
+                objReceipt = New Receipt()
+                'objReceipt.ReceiptId = currentReceipt
+                objReceipt.LstInvoice = New List(Of Invoice)()
+
+                Dim objProc = getObjInvFromDwNew(dw)
+                objReceipt.LstInvoice.Add(objProc)
+                'Session("Dup") = Nothing
+                'End If
+
+                '    End If
+                'End If
+            Next
+
+            Dim tempp = JsonConvert.SerializeObject(objCostNo)
+
+            Return objCostNo
+
+
+
+            'Try
+            '    lstCostumer = JsonConvert.DeserializeObject(tempp)
+            'Catch ex As Exception
+            '    Dim exxx = ex.Message
+            'End Try
+
+            'Try
+            '    Dim lstCostumer1 = JsonConvert.DeserializeObject(Of Costumer)(tempp)
+            'Catch ex As Exception
+            '    Dim essd = ex.Message
+            'End Try
+
+
+            'Dim items As IList(Of Costumer) = dt.AsEnumerable() _
+            '    .Select(Function(row) New Costumer() With {
+            '    .
+        Catch ex As Exception
+
+        End Try
+
     End Function
 
     Private Function fillObj(dt As DataTable) As Costumer
